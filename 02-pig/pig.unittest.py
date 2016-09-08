@@ -49,7 +49,7 @@ otherwise it returns False. (Call this  only after the human's move.)   """
         self.assertFalse(is_game_over(100, 100), "Game should not be over if both scores are tied at 100")
 
     def test_is_game_over_tie_over_100(self):
-        self.assertFalse(is_game_over(1000, 1000), , "Game should not be over if both scores are tied and OVER 100")
+        self.assertFalse(is_game_over(1000, 1000), "Game should not be over if both scores are tied and OVER 100")
 
 # def roll():
     """Returns a random number in the range 1 to 6, inclusive. To do this, find the random module on https://docs.python.org/3/library/index.html and follow the link to find the randint method.   """

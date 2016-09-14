@@ -37,16 +37,6 @@ class TestThreeMusketeers(unittest.TestCase):
                          get_board())
 
     def test_string_to_location(self):
-        self.assertEqual(string_to_location('A1'), (0, 0))
-        self.assertEqual(string_to_location('B5'), (1, 4))
-        self.assertEqual(string_to_location('C1'), (2, 0))
-        self.assertEqual(string_to_location('D5'), (3, 4))
-        self.assertEqual(string_to_location('E1'), (4, 0))
-        self.assertEqual(string_to_location('A1'), (0, 0))
-        self.assertEqual(string_to_location('B2'), (1, 1))
-        self.assertEqual(string_to_location('C3'), (2, 2))
-        self.assertEqual(string_to_location('D4'), (3, 3))
-        self.assertEqual(string_to_location('E5'), (4, 4))
         self.fail() # Replace with tests
 
     def test_location_to_string(self):

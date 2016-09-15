@@ -69,7 +69,7 @@ def location_to_string(location):
     """Returns the string representation of a location."""
     assert location[0] >= 0 and location[0] <= 4
     assert location[1] >= 0 and location[1] <= 4
-    pass
+    return chr(location[0]+65) + str(location[1]+1)
 
 def at(location):
     """Returns the contents of the board at the given location."""

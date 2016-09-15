@@ -56,10 +56,20 @@ class TestThreeMusketeers(unittest.TestCase):
         self.assertRaises(AssertionError, string_to_location_2, "F6")
         
 
-    """
-    def test_location_to_string(self):
-        self.fail() # Replace with tests
 
+    def test_location_to_string(self):
+        self.assertEqual("A5", location_to_string((0, 4)))
+        self.assertEqual("B5", location_to_string((1, 4)))
+        self.assertEqual("C5", location_to_string((2, 4)))
+        self.assertEqual("D5", location_to_string((3, 4)))
+        self.assertEqual("E5", location_to_string((4, 4)))
+        self.assertEqual("A1", location_to_string((0, 0)))
+        self.assertEqual("B2", location_to_string((1, 1)))
+        self.assertEqual("C3", location_to_string((2, 2)))
+        self.assertEqual("D4", location_to_string((3, 3)))
+        self.assertEqual("E5", location_to_string((4, 4)))
+
+    """
     def test_at(self):
         self.fail() # Replace with tests
 

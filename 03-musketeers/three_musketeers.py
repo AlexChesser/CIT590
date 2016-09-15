@@ -69,6 +69,18 @@ def location_to_string(location):
     """Returns the string representation of a location."""
     assert location[0] >= 0 and location[0] <= 4
     assert location[1] >= 0 and location[1] <= 4
+    # 65 is the known ASCII number value of the capital letter A
+    # if we convert 65 to a character using the `chr` function
+    # we get the letter A
+    # so if we pass a `0` as position 1 of the location, we get the CHARACTER 'A' + 0 (additional letters)
+    # if we pass a `1` as position 1 of the location, we get the CHARACTER 'A' + 1 additional letters which is 'B'
+    # and so on.
+    #
+    # similarly, we are looking for a string version of the number in position 2 of the location
+    # so we *first* add one because the coordinate system starts with 1 and not 0
+    # then we turn that increased number into a string using the str function
+    #
+    # finally we concatenate that string using + and return it.  
     return chr(location[0]+65) + str(location[1]+1)
 
 def at(location):

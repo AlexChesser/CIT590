@@ -47,7 +47,10 @@ def location_to_string(location):
     """Returns the string representation of a location."""
     assert location[0] >= 0 and location[0] <= 4
     assert location[1] >= 0 and location[1] <= 4
-    pass # Replace with code
+    (row, col) = (s[0], s[1])
+    row_lookup = { 'A': 0, 'B': 1, 'C': 2, 'D': 3, 'E': 4 }
+    col_lookup = { '1': 0, '2': 1, '3': 2, '4': 3, '5': 4 }
+    return (row_lookup[row], col_lookup[col])
 
 def at(location):
     """Returns the contents of the board at the given location."""

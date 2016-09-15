@@ -1,2 +1,2 @@
 # CIT590
-Following along (secretly) wiht my Girlfriend's first year introductory python course.
+Following along with a python course

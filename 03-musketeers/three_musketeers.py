@@ -45,13 +45,27 @@ def string_to_location(s):
     col_lookup = { '1': 0, '2': 1, '3': 2, '4': 3, '5': 4 }
     return (row_lookup[s[0]], col_lookup[s[1]])
 
-def location_to_string(location):
-    """Returns the string representation of a location."""
-    assert location[0] >= 0 and location[0] <= 4
-    assert location[1] >= 0 and location[1] <= 4
-    pass
+def string_to_location_2(s):
+    """Given a two-character string (such as 'A5'), returns the designated
+       location as a 2-tuple (such as (0, 4))."""
+    assert s[0] >= 'A' and s[0] <= 'E'
+    assert s[1] >= '1' and s[1] <= '5'
+    # ord              return the unicode value of a single letter
+    # ord("A")         get the numeric value of the capital letter A
+    A = ord("A")
+    # ord(s[0])        get the numeric value of the FIRST LETTER in the string_to_location
+    # ord(s[0]) - A    take the numeric value of the first letter of the string_to_location
+    #                  and subtract the value of the FIRST AVAILABLE letter
+    #                  so SINCE the ASCII code of the letter A is 65, this is similar to saying 
+    #                  NUMBER_OF FIRST_LETTER - 65
+    #
+    # int(s[1])        convert the SECOND letter of the string to an integer
+    # int(s[1]) - 1    set this number to the equivalent of a ZERO-BASED array 
+    return (ord(s[0]) - A, int(s[1]) - 1)
+    # alternative:
+    # return (ord(s[0]) - 65, int(s[1]) - 1)
 
-def location_to_string_2(location):
+def location_to_string(location):
     """Returns the string representation of a location."""
     assert location[0] >= 0 and location[0] <= 4
     assert location[1] >= 0 and location[1] <= 4

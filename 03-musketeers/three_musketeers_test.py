@@ -39,6 +39,23 @@ class TestThreeMusketeers(unittest.TestCase):
     def test_string_to_location(self):
         self.assertEqual((0, 4), string_to_location("A5"))
 
+    def test_string_to_location_2(self):
+        self.assertEqual((0, 4), string_to_location_2("A5"))
+        self.assertEqual((1, 4), string_to_location_2("B5"))
+        self.assertEqual((2, 4), string_to_location_2("C5"))
+        self.assertEqual((3, 4), string_to_location_2("D5"))
+        self.assertEqual((4, 4), string_to_location_2("E5"))
+        self.assertEqual((0, 0), string_to_location_2("A1"))
+        self.assertEqual((1, 1), string_to_location_2("B2"))
+        self.assertEqual((2, 2), string_to_location_2("C3"))
+        self.assertEqual((3, 3), string_to_location_2("D4"))
+        self.assertEqual((4, 4), string_to_location_2("E5"))
+        # don't let this one scare you.
+        # it checks to make sure there is an error where we expect it to be. 
+        self.assertRaises(AssertionError, string_to_location_2, "A0") 
+        self.assertRaises(AssertionError, string_to_location_2, "F6")
+        
+
     """
     def test_location_to_string(self):
         self.fail() # Replace with tests
@@ -111,5 +128,5 @@ class TestThreeMusketeers(unittest.TestCase):
 
 
     """
-    
+
 unittest.main()

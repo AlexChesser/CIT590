@@ -52,6 +52,13 @@ class TestThreeMusketeers(unittest.TestCase):
         self.assertEqual((4, 4), string_to_location_2("E5"))
         # don't let this one scare you.
         # it checks to make sure there is an error where we expect it to be. 
+        # because of the complexity of this type of test, we have to call the 
+        # assert in a different way
+        #
+        # assert "Raises" stands for "raises an exception" whihc in plain language
+        # just means causes a critical error that would normally stop the program
+        # (but since you called the function in this funny way, the computer was 
+        # able to keep going ... if only all programs were this smart)
         self.assertRaises(AssertionError, string_to_location_2, "A0") 
         self.assertRaises(AssertionError, string_to_location_2, "F6")
         

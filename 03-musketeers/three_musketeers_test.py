@@ -61,8 +61,6 @@ class TestThreeMusketeers(unittest.TestCase):
         # able to keep going ... if only all programs were this smart)
         self.assertRaises(AssertionError, string_to_location_2, "A0") 
         self.assertRaises(AssertionError, string_to_location_2, "F6")
-        
-
 
     def test_location_to_string(self):
         self.assertEqual("A5", location_to_string((0, 4)))
@@ -76,10 +74,13 @@ class TestThreeMusketeers(unittest.TestCase):
         self.assertEqual("D4", location_to_string((3, 3)))
         self.assertEqual("E5", location_to_string((4, 4)))
 
-    """
-    def test_at(self):
-        self.fail() # Replace with tests
 
+    def test_at(self):
+        self.assertEqual(at((0, 0)), '-')
+        self.assertEqual(at((1, 2)), 'R')
+        self.assertEqual(at((1, 3)), 'M')
+
+    """
     def test_all_locations(self):
         self.fail() # Replace with tests
 

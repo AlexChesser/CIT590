@@ -89,6 +89,7 @@ def at(location):
 
 def all_locations():
     """Returns a list of all 25 locations on the board."""
+    
     pass # Replace with code
 
 def adjacent_location(location, direction):

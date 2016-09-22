@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!-- saved from url=(0085)http://www.cis.upenn.edu/~matuszek/cit590-2016/Assignments/04-traveling-salesman.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>CIT590</title>
+    <link rel="stylesheet" type="text/css" href="./CIT590_files/css">
+    <!-- My stylesheets -->
+    <link rel="stylesheet" type="text/css" href="./CIT590_files/style.css">
+    <!-- Google code prettifier -->
+    <link rel="stylesheet" type="text/css" href="./CIT590_files/prettify.css">
+    <script src="./CIT590_files/prettify.js.download" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="./CIT590_files/prettify(1).css">
+    <script src="./CIT590_files/prettify.js(1).download" type="text/javascript"></script>
+    <link rel="stylesheet" href="./CIT590_files/style.css" type="text/css">
+  </head>
+  <!-- Google code prettifier --> <body onload="prettyPrint()">
+    <header><span class="head">&nbsp;CIT 590 Assignment 4: Traveling Salesman</span><br>
+      &nbsp; <span class="subhead">Spring 2016, David Matuszek</span> </header>
+    <h1>Purposes of this assignment</h1>
+    <ul>
+      <li>To give you some experience with dictionaries and sets</li>
+      <li>To give you more practice with writing tests</li>
+      <li>To get you started thinking about how to solve problems with programs</li>
+    </ul>
+    <h1>General idea of the assignment</h1>
+    <p>Suppose there are a number of "cities," as in Figure 1 below. The
+      distance between any two cities is the standard Euclidean distance, that
+      is, √((x<sub>1</sub>-x<sub>2</sub>)<sup>2</sup>+(y<sub>1</sub>-y<sub>2</sub>)<sup>2</sup>).
+      A traveling salesman wishes to visit every city exactly once, then return
+      to his starting point. (It doesn't matter what city is the starting
+      point.) Such a path is called a <span class="definiendum">circuit</span>,
+      as in Figure 2. However, the salesman also wishes to minimize the total
+      distance that must be traveled.</p>
+    <table border="0" cellpadding="4" cellspacing="0">
+      <tbody>
+        <tr>
+          <td><img src="./CIT590_files/cities.gif" alt="Cities" border="1" height="200" width="200"></td>
+          <td align="center"><img src="./CIT590_files/salesman-path.gif" alt="circuit" border="1" height="200" width="200"></td>
+        </tr>
+        <tr>
+          <td align="center"><strong>Figure 1, Cities.</strong></td>
+          <td align="center"><strong>Figure 2. A circuit.</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <p> </p>
+    <h2>Solutions from the web</h2>
+    <p>This is a classic computer science problem, known as the T<strong>raveling
+        Salesman problem.</strong> You can find algorithms for finding
+      reasonably good solutions on the web, and you are welcome to look at those
+      algorithms. However, I want you use a <span class="definiendum">hill
+        climbing</span> approach, where you start with "any" solution, and try
+      to progressively improve it until you can't improve it any more.</p>
+    <p>This should require <em>you</em> to think about how to solve the
+      problem, rather than just copying some algorithm you may or may not
+      understand. Your final solution is unlikely to be the optimal (best
+      possible) solution, but that's okay, so long as it isn't obviously
+      terrible. </p>
+    <h1>Specific requirements</h1>
+    <h2>Data representation</h2>
+    <p>I am providing a file, <a href="http://www.cis.upenn.edu/~matuszek/cit590-2016/Assignments/city-data.txt">city-data.txt</a>,
+      containing the latitudes and longitudes of the 50 state capitals of the
+      U.S. Each line contains the name of the state, the name of the city, the
+      latitude, and the longitude. These four items are separated by <strong>tabs</strong>.
+      Read this file in as a list of 4-tuples.</p>
+    <p>The list of 4-tuples will be referred to as a "road map." It represents
+      the path the salesman follows, starting with the first city in the list
+      and ending back at the first city in the list.</p>
+    <p>While I will require these particular data representations as function
+      parameters and function results, this does not imply that you have to work
+      with these representations as you solve the problems. Python makes it easy
+      to convert from one kind of sequence to another.</p>
+    <h2>Required functions (file <code>cities.py</code>)</h2>
+    <dl>
+      <dt><code>def read_cities(<em>file_name</em>)</code></dt>
+      <dd>Read in the cities from the given <code><em>file_name</em></code>,
+        and return them as a list of four-tuples: <code>[(<em>state</em>, <em>city</em>,
+          <em>latitude</em>, <em>longitude</em>), ...] </code>Use this as your
+        initial <code><em>road_map</em></code>, that is, the cycle Alabama →
+        Alaska → Arizona → ... → Wyoming → Alabama.</dd>
+      <dt><code>def print_cities(</code><code><code><em>road_map</em></code>)</code></dt>
+      <dd>Prints a list of cities, along with their locations. Print only one or
+        two digits after the decimal point.</dd>
+      <dt><code>def compute_total_distance(<em>road_ma<span style="color: rgb(153, 0, 0);">p</span></em><em></em>)</code></dt>
+      <dd>Returns, as a floating point number, the sum of the distances of all
+        the connections in the <em><code>road_map</code></em><code><em></em></code>.
+        Remember that it's a cycle, so that (for example) in the initial
+        road_map, Wyoming connects to Alabama..</dd>
+      <dt><code>def swap_adjacent_cities(<em>road_map</em>, <em>index</em>)</code></dt>
+      <dd>Take the city at location <code><em>index </em></code>in the <code><em>road_map</em></code>,
+        and the city at location <code><em>index</em>+1</code> (or at 0, if <code><em>index</em></code>
+        refers to the last element in the list), swap their positions in the <code><em>road_map</em></code>,
+        compute the new total distance, and return the tuple<code> (<em>new_road_map</em>,
+          <em>new_total_distance</em>)</code>.</dd>
+      <dt><code>def swap_cities(<em>road_map</em>, <em>index1, index2</em>)</code></dt>
+      <dd>Take the city at location <code><em>index </em></code>in the <code><em>road_map</em></code>,
+        and the city at location <code><em>index2</em></code>, swap their
+        positions in the <code><em>road_map</em></code>, compute the new total
+        distance, and return the tuple<code> (<em>new_road_map</em>, <em>new_total_distance</em>)</code>.
+        Allow the possibility that <code><em>index1</em>=<em>index2</em></code>,
+        and handle this case correctly.</dd>
+      <dt><code>def find_best_cycle(<em>road_map</em>)</code></dt>
+      <dd>Using a combination of <code>swap_cities </code>and <code>swap_adjacent_cities</code>,
+        try 10000 swaps, and each time keep the best cycle found so far. After
+        10000 swaps, return the best cycle found so far.</dd>
+      <dt><code>def print_map(<em>road_map</em>)</code></dt>
+      <dd>Prints, in an easily understandable format, the cities and their
+        connections, along with the cost for each connection and the total cost.</dd>
+      <dt><code>def main()</code></dt>
+      <dd>Reads in and prints out the city data, then creates the "best" cycle
+        and prints it out.</dd>
+    </dl>
+    <h2>Required tests (file <code>cities_test.py</code>)</h2>
+    <p>Programs should be tested as thoroughly as possible. Functions that do
+      input or output are difficult to test. Therefore, functions that do input
+      or output should do as little computation as possible, and functions that
+      do computation should do no input or output.</p>
+    <p>In this assignment <code>main</code>,<code> print_cities</code>, and<code>
+        print_map</code> result in input or output, so do not write unit tests
+      for these. Unit test all the other functions, as well as any additional
+      computational functions you might write.</p>
+    <p><strong>TDD</strong>, <strong>Test Driven Design</strong>, <em>really
+        is</em> a good idea. Here is the general approach:</p>
+    <ol>
+      <li>Write a stub for each function. (A <span class="definiendum">stub</span>
+        is a function that does nothing or, if it must return a value, returns a
+        value that is unlikely to be correct.)</li>
+      <li>Pick a function--if possible, one that does not depend on any other
+        functions you haven't yet written--and write a test for it. Run the test
+        and make sure it fails.</li>
+      <li>Improve the function just enough to make it pass the test.</li>
+      <li>If the function needs to do more, then expand the test (or add another
+        test) to test the new functionality. Run the test and make sure it
+        fails. Then return to step 3. Repeat as many times as necessary until
+        the function is complete.</li>
+      <li>If any functions remain to be written, return to step 2.</li>
+    </ol>
+    <h1>Programming hints</h1>
+    <ul>
+      <li>You don't need any global variables.</li>
+      <li>Import <code>random</code> at the top of your program; then <code>number&nbsp;=&nbsp;1000&nbsp;*&nbsp;random.random()</code>
+        will give you a floating-point number in the range <code>0.0&nbsp;&lt;=&nbsp;number&nbsp;&lt;&nbsp;1000.0</code>.</li>
+      <li>If you want to treat a list <code>lst</code> as circular (the first
+        item follows the last item), the item after <code>lst[i] </code>is<code><span style="color: black;"><span style="font-family: serif;">
+            </span></span></code>not just<code> <nobr>lst(i + 1)</nobr></code>,
+        but is <code><nobr>lst[(i + 1) % len(lst)]</nobr> </code>.</li>
+      <li>If you haven't yet read my <a href="http://www.cis.upenn.edu/~matuszek/cit590-2016/Pages/unit_testing_in_python.html">Unit
+          Testing writeup</a> (linked to from the course home page), now would
+        be a good time to do so. </li>
+      <li>Don't use <a href="https://en.wikipedia.org/wiki/Magic_number_%28programming%29#Unnamed_numerical_constants">magic
+          numbers</a>! For example, there happen to be 50 cities in the data set
+        you are given, but don't use <code>50</code> in your code;&nbsp; can
+        use something like <code>len(<em>city_list</em>)</code> instead.</li>
+    </ul>
+    <h1>Grading</h1>
+    <p>The assignment will be graded on the basis of 100 points total.</p>
+    <ul>
+      <li><strong>Correctness.</strong> We will have <em>our own unit tests,</em>
+        which your functions must pass. This means that (1) the above functions
+        must take parameters and produce results <em>exactly</em> as specified,
+        or our test will fail and cost you points, and (2) your own unit tests
+        should be good enough to catch any errors before we do.</li>
+      <li><strong>Style. </strong>Use proper indentation (4 spaces) and proper
+        spacing. Use good, self-explanatory variable and function names. Don't
+        repeat code if you can put it in a function and just call the function.
+        Don't use "magic numbers" (unexplained constants in your code); give
+        them names. Try to avoid redundancy (such as the beginner's <code>if&nbsp;better&nbsp;==&nbsp;True</code>).
+        </li>
+    </ul>
+    <h1>Due date</h1>
+    Zip your two files and turn them in to <a href="https://canvas.upenn.edu/courses/1335117">Canvas</a>
+    before <strong>11:59pm Tuesday, September 27</strong>.
+  
+
+</body></html>

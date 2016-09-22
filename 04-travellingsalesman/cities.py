@@ -44,3 +44,7 @@ def main()
     """Reads in and prints out the city data, then creates the "best"
      cycle and prints it out."""
     pass
+
+
+ if __name__ == '__main__':
+    main()
